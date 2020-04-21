@@ -31,7 +31,7 @@ def identify_snps(headers,seqs,file_name):
 	return_line = ''
 	if seq1.startswith('M') and seq1.endswith('*'):
 		for i in range(len(headers)):
-			for n in range(len(seq1)):
+			for n in range(len(seqs[i])):
 				if seq1[n] != seqs[i][n]:
 					prot_change = seq1[n]+str(n+1)+seqs[i][n]
 					return_line += file_name+'\t'+headers[i]+'\t'+prot_change+'\t'+str(n+1)+'\t'+seq1[n]+'\t'+seqs[i][n] + '\n'
@@ -42,9 +42,8 @@ files = os.listdir(prot_dir)
 for file in files:
 	src = os.path.join(prot_dir,file)
 	headers,seqs = read_fasta(src)
-	snp_table = identify_snps(headers,seqs,src)
+	snp_table = identify_snps(headers,seqs,file)
 	dst = os.path.join(output_dir,file+'.txt')
 	o = open(dst,'w')
 	o.write(snp_table)
 	o.close()
-	
