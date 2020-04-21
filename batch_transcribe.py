@@ -7,7 +7,7 @@ import sys
 
 input_dir = sys.argv[1]
 output_dir = sys.argv[2]
-script_path = sys.arv[3]
+script_path = sys.argv[3]
 
 
 if not os.path.exists(output_dir):
