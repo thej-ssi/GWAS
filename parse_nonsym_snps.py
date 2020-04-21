@@ -3,9 +3,9 @@
 import os
 import sys
 
-nucl_dir = sys.argv[1]
-prot_dir = sys.argv[2]
-output_dir = sys.argv[3]
+#nucl_dir = sys.argv[1]
+prot_dir = sys.argv[1]
+output_dir = sys.argv[2]
 
 if not os.path.exists(output_dir):
 	os.makedirs(output_dir)
@@ -25,18 +25,26 @@ def read_fasta(input_file):
 	return(headers,seqs)
 
 
-def identify_snps(headers,seqs):
+def identify_snps(headers,seqs,file_name):
 	seq1 = seqs[0]
 	ref_header = headers[0]
-	return_list = []
+	return_line = ''
 	if seq1.startswith('M') and seq1.endswith('*'):
 		for i in range(len(headers)):
 			for n in range(len(seq1)):
 				if seq1[n] != seqs[i][n]:
 					prot_change = seq1[n]+str(n+1)+seqs[i][n]
-					return_list.append(prot_change+'\t'+headers[i]+'\t'+str(n+1)+'\t'+seq1[n]+'\t'+seqs[i][n])
-	return(return_list)
+					return_line += file_name+'\t'+headers[i]+'\t'+prot_change+'\t'+str(n+1)+'\t'+seq1[n]+'\t'+seqs[i][n] + '\n'
+	return(return_line)
 
-headers,seqs = read_fasta(sys.argv[1])
-snps = identify_snps(headers,seqs)
-print(snps)
+
+files = os.listdir(prot_dir)
+for file in files:
+	src = os.path.join(prot_dir,file)
+	headers,seqs = read_fasta(src)
+	snp_table = identify_snps(headers,seqs,src)
+	dst = os.path.join(output_dir,file+'.txt')
+	o = open(dst,'w')
+	o.write(snp_table)
+	o.close()
+	
