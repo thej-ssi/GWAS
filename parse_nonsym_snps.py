@@ -28,18 +28,15 @@ def read_fasta(input_file):
 def identify_snps(headers,seqs):
 	seq1 = seqs[0]
 	ref_header = headers[0]
-	prot_change_list = [None]*len(seqs)
-	print(prot_change_list)
-	unique_prot_changes = []
+	return_list = []
 	if seq1.startswith('M') and seq1.endswith('*'):
 		for i in range(len(headers)):
 			for n in range(len(seq1)):
 				if seq1[n] != seqs[i][n]:
 					prot_change = seq1[n]+str(n+1)+seqs[i][n]
-					prot_change_list[i].append(prot_change)
-					if prot_change not in uniq_prot_changes:
-						uniq_prot_changes.append(prot_changes)
-	return(uniq_prot_changes,prot_changes)
+					return_list.append(prot_change+'\t'+headers[i]+'\t'+str(n+1)+'\t'+seq1[n]+'\t'+seqs[i][n])
+	return(return_list)
 
 headers,seqs = read_fasta(sys.argv[1])
-uniq,prot = identify_snps(headers,seqs)
+snps = identify_snps(headers,seqs)
+print(snps)
