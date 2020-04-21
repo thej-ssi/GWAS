@@ -41,6 +41,7 @@ def identify_snps(headers,seqs,file_name):
 files = os.listdir(prot_dir)
 for file in files:
 	src = os.path.join(prot_dir,file)
+	print('Parsing file '+src)
 	headers,seqs = read_fasta(src)
 	snp_table = identify_snps(headers,seqs,file)
 	dst = os.path.join(output_dir,file+'.txt')
