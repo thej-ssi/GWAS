@@ -2,12 +2,13 @@
 
 # usage: python3 batch_transcribe.py pan_genome_sequences pan_genome_protein_sequences
 
+import os
+import sys
+
 input_dir = sys.argv[1]
 output_dir = sys.argv[2]
 script_path = sys.arv[3]
 
-import os
-import sys
 
 if not os.path.exists(output_dir):
 	os.makedirs(output_dir)
