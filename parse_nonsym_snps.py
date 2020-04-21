@@ -31,7 +31,7 @@ def identify_snps(headers,seqs,file_name):
 	return_line = ''
 	if seq1.startswith('M') and seq1.endswith('*'):
 		for i in range(len(headers)):
-			for n in range(len(seqs[i])):
+			for n in range(min(len(seqs[i]),len(seq1))):
 				if seq1[n] != seqs[i][n]:
 					prot_change = seq1[n]+str(n+1)+seqs[i][n]
 					return_line += file_name+'\t'+headers[i]+'\t'+prot_change+'\t'+str(n+1)+'\t'+seq1[n]+'\t'+seqs[i][n] + '\n'
