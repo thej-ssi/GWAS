@@ -35,7 +35,7 @@ def identify_snps(headers,seqs):
 			for n in range(len(seq1)):
 				if seq1[n] != seqs[i][n]:
 					prot_change = seq1[n]+str(n+1)+seqs[i][n]
-					prot_change[i].append(prot_change)
+					prot_change_list[i].append(prot_change)
 					if prot_change not in uniq_prot_changes:
 						uniq_prot_changes.append(prot_changes)
 	return(uniq_prot_changes,prot_changes)
