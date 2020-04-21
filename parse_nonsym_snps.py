@@ -18,8 +18,8 @@ def read_fasta(input_file):
 		for line in f:
 			line = line.rstrip('\n')
 			if line[0] == '>':
-				headers.append[line[1:]]
-				seqs.append['']
+				headers.append(line[1:])
+				seqs.append('')
 			else:
 				seqs[-1] += line
 	return(headers,seqs)
